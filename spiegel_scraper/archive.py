@@ -35,9 +35,9 @@ def scrape_html(html: str):
         articles.append({
             'url': url,
             'headline': article.xpath('string(.//a/@title)'),
-            'is_paid': article.xpath('boolean(.//svg/title[text()="Icon: Spiegel Plus"])'),
-            'date_published': _parse_date(article.xpath('string(./footer/span[1])'), relative_base=timestamp),
-            'channel': article.xpath('string(./footer/span[3])'),
+            'is_paid': article.xpath('boolean(.//span[@data-flag-name="Spplus-paid"])'),
+            'date_published': _parse_date(article.xpath('string(.//span[@data-auxiliary][1])'), relative_base=timestamp),
+            'channel': article.xpath('string(.//span[@data-auxiliary][2])'),
         })
 
     return articles
